@@ -136,6 +136,16 @@ source ~/.config/fsh/extras/zsh-autocomplete/tokyonight-night.zsh
 
 > **注意**：上下文必须写 `:completion:*:unambiguous`——zsh-autocomplete 自己的 README 写的是 `:autocomplete:*:unambiguous`，那个模式匹配不上、会被静默忽略。另一个已知限制：历史行列表里命中文本的高亮是上游硬编码（黑字亮黄底，见 `_autocomplete__history_lines` 的 `_comp_colors`），没有任何定制入口。
 
+### history-substring-search 集成
+
+zsh-history-substring-search 默认用 ANSI 色高亮命中的子串（找到时 `bg=magenta`，找不到时 `bg=red`）——在 Tokyo Night 下违和。现成的重定义装在 `~/.config/fsh/extras/history-substring-search/`：
+
+```zsh
+source ~/.config/fsh/extras/history-substring-search/tokyonight-night.zsh
+```
+
+命中：粗体前景于 `bg_search` 上；未命中：粗体红。
+
 ### Overlay（微调少量样式）
 
 不必复制整个主题再改 —— 用 fsh 的 [overlay 机制](https://github.com/zdharma-continuum/fast-syntax-highlighting/blob/master/THEME_GUIDE.md)。创建 `~/.config/fsh/overlay.ini`：

@@ -47,6 +47,13 @@ if [[ -d $extra_dir ]]; then
   command cp "$extra_dir"/*.zsh "$dest/extras/zsh-autocomplete/"
 fi
 
+# Optional integration for zsh-history-substring-search's match highlight.
+extra_dir="$script_dir/extras/history-substring-search"
+if [[ -d $extra_dir ]]; then
+  command mkdir -p "$dest/extras/history-substring-search"
+  command cp "$extra_dir"/*.zsh "$dest/extras/history-substring-search/"
+fi
+
 if (( ${+functions[fast-theme]} )); then
   fast-theme "XDG:tokyonight-$variant"
   print "Done. Theme 'tokyonight-$variant' is active (this session and future sessions)."
@@ -59,3 +66,5 @@ fi
 print "Optional: if you use zsh-autocomplete, also add this line to your zshrc"
 print "(after the plugin) — it fixes the nearly-invisible 'common substring' entry:"
 print "  source ${dest}/extras/zsh-autocomplete/tokyonight-$variant.zsh"
+print "Optional: if you use zsh-history-substring-search, add (after the plugin):"
+print "  source ${dest}/extras/history-substring-search/tokyonight-$variant.zsh"

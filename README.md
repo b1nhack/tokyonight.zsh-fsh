@@ -136,6 +136,16 @@ Add the line after loading zsh-autocomplete, matching your active variant. The l
 
 > **Note:** use the context `:completion:*:unambiguous` — zsh-autocomplete's own README documents `:autocomplete:*:unambiguous`, which never matches and silently leaves the default in place. Also known limitation: the highlight of matched text in the *history-lines* listing is hardcoded upstream (black on bright yellow, `_comp_colors` in `_autocomplete__history_lines`) and exposes no customization hook.
 
+### history-substring-search integration
+
+zsh-history-substring-search highlights the matched substring with ANSI colors by default (`bg=magenta` when found, `bg=red` when not) — off-palette on Tokyo Night. Ready-made restyles land in `~/.config/fsh/extras/history-substring-search/`:
+
+```zsh
+source ~/.config/fsh/extras/history-substring-search/tokyonight-night.zsh
+```
+
+Found matches: bold foreground on `bg_search`. No match: bold red.
+
 ### Overlay (tweak a few styles)
 
 Don't copy and edit a whole theme — use an [F-Sy-H overlay](https://github.com/zdharma-continuum/fast-syntax-highlighting/blob/master/THEME_GUIDE.md). Create `~/.config/fsh/overlay.ini`:

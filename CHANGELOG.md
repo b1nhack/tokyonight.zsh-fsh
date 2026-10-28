@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   restyles the `common substring:` completion-list entry, whose default
   black-on-color11 rendering is nearly invisible on Tokyo Night palettes.
   `install.sh` copies these files and prints the `source` line.
+- history-substring-search integration:
+  `extras/history-substring-search/tokyonight-<style>.zsh` restyles the
+  matched-substring highlight (`HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND`
+  uses bold foreground on `bg_search`; not-found uses bold red).
 
 ## [1.0.0] - 2026-10-28
 
