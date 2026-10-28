@@ -124,6 +124,18 @@ Full definitions live in the [themes/](themes) INI files.
 
 ## Customization
 
+### zsh-autocomplete integration
+
+zsh-autocomplete paints its `common substring:` completion-list entry black on ANSI color 11 by default — nearly invisible on Tokyo Night palettes. This repo ships ready-made restyles (installed to `~/.config/fsh/extras/zsh-autocomplete/`):
+
+```zsh
+source ~/.config/fsh/extras/zsh-autocomplete/tokyonight-night.zsh
+```
+
+Add the line after loading zsh-autocomplete, matching your active variant. The label becomes bold blue and the common substring gets the theme's search treatment (foreground on `bg_search`).
+
+> **Note:** use the context `:completion:*:unambiguous` — zsh-autocomplete's own README documents `:autocomplete:*:unambiguous`, which never matches and silently leaves the default in place. Also known limitation: the highlight of matched text in the *history-lines* listing is hardcoded upstream (black on bright yellow, `_comp_colors` in `_autocomplete__history_lines`) and exposes no customization hook.
+
 ### Overlay (tweak a few styles)
 
 Don't copy and edit a whole theme — use an [F-Sy-H overlay](https://github.com/zdharma-continuum/fast-syntax-highlighting/blob/master/THEME_GUIDE.md). Create `~/.config/fsh/overlay.ini`:

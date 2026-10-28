@@ -124,6 +124,18 @@ F-Sy-H 样式键与 tokyonight.nvim 高亮组的对应关系（各变体的具�
 
 ## 自定义
 
+### zsh-autocomplete 集成
+
+zsh-autocomplete 默认把补全列表里的 `common substring:` 条目画成 ANSI color 11 上的黑字——在 Tokyo Night 配色下几乎不可见。本仓库提供了现成的重定义（安装到 `~/.config/fsh/extras/zsh-autocomplete/`）：
+
+```zsh
+source ~/.config/fsh/extras/zsh-autocomplete/tokyonight-night.zsh
+```
+
+把这行加在加载 zsh-autocomplete 之后，并与当前使用的变体保持一致。标签变为蓝色粗体，公共子串使用主题的 search 语义（前景于 `bg_search` 上）。
+
+> **注意**：上下文必须写 `:completion:*:unambiguous`——zsh-autocomplete 自己的 README 写的是 `:autocomplete:*:unambiguous`，那个模式匹配不上、会被静默忽略。另一个已知限制：历史行列表里命中文本的高亮是上游硬编码（黑字亮黄底，见 `_autocomplete__history_lines` 的 `_comp_colors`），没有任何定制入口。
+
 ### Overlay（微调少量样式）
 
 不必复制整个主题再改 —— 用 fsh 的 [overlay 机制](https://github.com/zdharma-continuum/fast-syntax-highlighting/blob/master/THEME_GUIDE.md)。创建 `~/.config/fsh/overlay.ini`：

@@ -40,6 +40,13 @@ for v in $variants; do
   command cp "$script_dir/themes/tokyonight-$v.ini" "$dest/tokyonight-$v.ini"
 done
 
+# Optional integration for zsh-autocomplete's "common substring:" line.
+local extra_dir="$script_dir/extras/zsh-autocomplete"
+if [[ -d $extra_dir ]]; then
+  command mkdir -p "$dest/extras/zsh-autocomplete"
+  command cp "$extra_dir"/*.zsh "$dest/extras/zsh-autocomplete/"
+fi
+
 if (( ${+functions[fast-theme]} )); then
   fast-theme "XDG:tokyonight-$variant"
   print "Done. Theme 'tokyonight-$variant' is active (this session and future sessions)."
@@ -48,3 +55,7 @@ else
   print "Activate it from a shell with Fast Syntax Highlighting loaded:"
   print "  fast-theme XDG:tokyonight-$variant"
 fi
+
+print "Optional: if you use zsh-autocomplete, also add this line to your zshrc"
+print "(after the plugin) — it fixes the nearly-invisible 'common substring' entry:"
+print "  source ${dest}/extras/zsh-autocomplete/tokyonight-$variant.zsh"

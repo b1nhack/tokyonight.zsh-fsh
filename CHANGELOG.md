@@ -3,6 +3,15 @@
 All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.0] - 2026-10-28
+
+### Added
+
+- zsh-autocomplete integration: `extras/zsh-autocomplete/tokyonight-<style>.zsh`
+  restyles the `common substring:` completion-list entry, whose default
+  black-on-color11 rendering is nearly invisible on Tokyo Night palettes.
+  `install.sh` copies these files and prints the `source` line.
+
 ## [1.0.0] - 2026-10-28
 
 ### Added
