@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="535" height="360" viewBox="0 0 535 360" font-family="ui-monospace, &#x27;JetBrains Mono&#x27;, &#x27;Fira Code&#x27;, &#x27;SF Mono&#x27;, Menlo, Consolas, monospace" font-size="13">
+<rect x="0" y="0" width="535" height="360" rx="10" fill="#d0d5e3"/>
+<path d="M 0 38 H 535 V 350 Q 535 360 525 360 H 10 Q 0 360 0 350 Z" fill="#e1e2e7"/>
+<circle cx="22.0" cy="21.0" r="5.5" fill="#f52a65"/>
+<circle cx="38.5" cy="21.0" r="5.5" fill="#8c6c3e"/>
+<circle cx="55.0" cy="21.0" r="5.5" fill="#587539"/>
+<text x="267.7" y="25.7" text-anchor="middle" fill="#6172b0">zsh — tokyonight-day</text>
+<text x="22.0" y="69.0" fill="#848cb5" xml:space="preserve"># tokyonight.zsh-fsh — Tokyo Night for Fast Syntax Highlighting</text>
+<text x="22.0" y="91.0" fill="#188092" xml:space="preserve">autoload</text>
+<text x="84.4" y="91.0" fill="#007197" xml:space="preserve"> -Uz </text>
+<text x="123.4" y="91.0" fill="#188092" xml:space="preserve">compinit</text>
+<text x="185.8" y="91.0" fill="#006a83" xml:space="preserve"> &amp;&amp; </text>
+<text x="217.0" y="91.0" fill="#188092" xml:space="preserve">compinit</text>
+<text x="279.4" y="91.0" fill="#007197" xml:space="preserve"> -C</text>
+<text x="22.0" y="113.0" fill="#188092" xml:space="preserve">export</text>
+<text x="68.8" y="113.0" fill="#3760bf" xml:space="preserve"> PATH=</text>
+<text x="115.6" y="113.0" fill="#587539" xml:space="preserve">&quot;</text>
+<text x="123.4" y="113.0" fill="#9854f1" xml:space="preserve">$HOME</text>
+<text x="162.4" y="113.0" fill="#587539" xml:space="preserve">/.local/bin:</text>
+<text x="256.0" y="113.0" fill="#9854f1" xml:space="preserve">$PATH</text>
+<text x="295.0" y="113.0" fill="#587539" xml:space="preserve">&quot;</text>
+<text x="22.0" y="135.0" fill="#188092" xml:space="preserve">alias</text>
+<text x="61.0" y="135.0" fill="#3760bf" xml:space="preserve"> ll=</text>
+<text x="92.2" y="135.0" fill="#587539" xml:space="preserve">&#x27;ls -lah --color=auto&#x27;</text>
+<text x="22.0" y="157.0" fill="#188092" xml:space="preserve">ll</text>
+<text x="37.6" y="157.0" fill="#007197" xml:space="preserve"> ~/work/tokyonight.zsh-fsh</text>
+<text x="22.0" y="179.0" fill="#2e7de9" xml:space="preserve">git</text>
+<text x="45.4" y="179.0" fill="#188092" xml:space="preserve"> commit</text>
+<text x="100.0" y="179.0" fill="#007197" xml:space="preserve"> -m</text>
+<text x="123.4" y="179.0" fill="#587539" xml:space="preserve"> &quot;feat: add tokyonight theme&quot;</text>
+<text x="349.6" y="179.0" fill="#007197" xml:space="preserve"> --amend</text>
+<text x="22.0" y="201.0" fill="#2e7de9" xml:space="preserve">docker</text>
+<text x="68.8" y="201.0" fill="#188092" xml:space="preserve"> run</text>
+<text x="100.0" y="201.0" fill="#007197" xml:space="preserve"> --rm -it</text>
+<text x="170.2" y="201.0" fill="#3760bf" xml:space="preserve"> alpine:3.19</text>
+<text x="22.0" y="223.0" fill="#2e7de9" xml:space="preserve">grep</text>
+<text x="53.2" y="223.0" fill="#007197" xml:space="preserve"> -i</text>
+<text x="76.6" y="223.0" fill="#007197" xml:space="preserve"> --count</text>
+<text x="139.0" y="223.0" fill="#587539" xml:space="preserve"> &quot;pattern&quot;</text>
+<text x="217.0" y="223.0" fill="#3760bf" xml:space="preserve"> </text>
+<text x="224.8" y="223.0" fill="#9854f1" font-weight="bold" xml:space="preserve">*</text>
+<text x="232.6" y="223.0" fill="#9854f1" xml:space="preserve">.md</text>
+<text x="22.0" y="245.0" fill="#9854f1" xml:space="preserve">for</text>
+<text x="45.4" y="245.0" fill="#3760bf" xml:space="preserve"> f </text>
+<text x="68.8" y="245.0" fill="#9854f1" xml:space="preserve">in </text>
+<text x="92.2" y="245.0" fill="#9854f1" font-weight="bold" xml:space="preserve">*.zsh</text>
+<text x="131.2" y="245.0" fill="#3760bf" xml:space="preserve">; </text>
+<text x="146.8" y="245.0" fill="#9854f1" xml:space="preserve">do</text>
+<text x="162.4" y="245.0" fill="#2e7de9" xml:space="preserve"> wc</text>
+<text x="185.8" y="245.0" fill="#007197" xml:space="preserve"> -l</text>
+<text x="209.2" y="245.0" fill="#8c6c3e" xml:space="preserve"> $f</text>
+<text x="232.6" y="245.0" fill="#006a83" xml:space="preserve">;</text>
+<text x="240.4" y="245.0" fill="#9854f1" xml:space="preserve"> done</text>
+<text x="22.0" y="267.0" fill="#3760bf" xml:space="preserve">size=</text>
+<text x="61.0" y="267.0" fill="#3760bf" xml:space="preserve">$</text>
+<text x="68.8" y="267.0" fill="#9854f1" xml:space="preserve">((</text>
+<text x="84.4" y="267.0" fill="#b15c00" xml:space="preserve">4096</text>
+<text x="115.6" y="267.0" fill="#3760bf" xml:space="preserve"> + </text>
+<text x="139.0" y="267.0" fill="#2e7de9" font-weight="bold" xml:space="preserve">HISTSIZE</text>
+<text x="201.4" y="267.0" fill="#9854f1" xml:space="preserve">))</text>
+<text x="22.0" y="289.0" fill="#188092" xml:space="preserve">cat</text>
+<text x="45.4" y="289.0" fill="#006a83" xml:space="preserve"> &lt;&lt;&lt;</text>
+<rect x="76.6" y="277.6" width="62.4" height="16.2" fill="#c4c8da"/>
+<text x="76.6" y="289.0" fill="#3760bf" xml:space="preserve"> &quot;hello </text>
+<rect x="139.0" y="277.6" width="39.0" height="16.2" fill="#c4c8da"/>
+<text x="139.0" y="289.0" fill="#8c6c3e" xml:space="preserve">$USER</text>
+<rect x="178.0" y="277.6" width="7.8" height="16.2" fill="#c4c8da"/>
+<text x="178.0" y="289.0" fill="#3760bf" xml:space="preserve">&quot;</text>
+<text x="22.0" y="311.0" fill="#2e7de9" xml:space="preserve">make</text>
+<text x="53.2" y="311.0" fill="#3760bf" xml:space="preserve"> </text>
+<text x="61.0" y="311.0" fill="#b15c00" font-weight="bold" xml:space="preserve">2</text>
+<text x="68.8" y="311.0" fill="#006a83" xml:space="preserve">&gt;</text>
+<text x="76.6" y="311.0" fill="#007197" xml:space="preserve"> /dev/null</text>
+<text x="154.6" y="311.0" fill="#006a83" xml:space="preserve"> &amp;&amp; </text>
+<text x="185.8" y="311.0" fill="#188092" xml:space="preserve">echo</text>
+<text x="217.0" y="311.0" fill="#b15c00" font-weight="bold" xml:space="preserve"> !!</text>
+<text x="22.0" y="333.0" fill="#f52a65" font-weight="bold" xml:space="preserve">invalidcommand</text>
+<text x="131.2" y="333.0" fill="#007197" xml:space="preserve"> --typo</text>
+<text x="185.8" y="333.0" fill="#3760bf" xml:space="preserve">=</text>
+<text x="193.6" y="333.0" fill="#007197" xml:space="preserve">/dev/null</text>
+</svg>
