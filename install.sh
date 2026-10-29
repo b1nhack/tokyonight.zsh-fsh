@@ -64,7 +64,9 @@ else
 fi
 
 print "Optional: if you use zsh-autocomplete, also add this line to your zshrc"
-print "(after the plugin) — it fixes the nearly-invisible 'common substring' entry:"
+print "(after the plugin) — it restyles the nearly-invisible 'common substring'"
+print "entry, the '(MORE)' truncation badge and the history-lines match"
+print "highlight, all hardcoded off-palette upstream:"
 print "  source ${dest}/extras/zsh-autocomplete/tokyonight-$variant.zsh"
 print "Optional: if you use zsh-history-substring-search, add (after the plugin):"
 print "  source ${dest}/extras/history-substring-search/tokyonight-$variant.zsh"

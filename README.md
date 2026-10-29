@@ -126,15 +126,20 @@ Full definitions live in the [themes/](themes) INI files.
 
 ### zsh-autocomplete integration
 
-zsh-autocomplete paints its `common substring:` completion-list entry black on ANSI color 11 by default — nearly invisible on Tokyo Night palettes. This repo ships ready-made restyles (installed to `~/.config/fsh/extras/zsh-autocomplete/`):
+zsh-autocomplete paints its `common substring:` completion-list entry black on ANSI color 11 by default — nearly invisible on Tokyo Night palettes. The same extras also restyle two more spots that upstream hardcodes outside any zstyle:
+
+- the `(MORE)` badge appended when the async listing is truncated — ANSI black on bright blue via raw `compadd -x` (`Functions/Init/.autocomplete__async`), which bypasses the zstyle `format` machinery;
+- the matched-query highlight in the *history-lines* listing — SGR `30;103` (black on bright yellow) baked into the `_comp_colors` pattern specs (`Completions/_autocomplete__history_lines`), overriding the zstyle `list-colors` machinery.
+
+Since neither exposes an official hook, the extras patch the containing shell functions after the plugin loads: the `(MORE)` badge becomes a truecolor bold theme-background-on-blue badge, and the history-lines matches get the theme's search treatment (bold foreground on `bg_search`) — neither depends on your terminal's ANSI palette anymore. (The history-lines function is `#autoload`ed, so the extras force-load its definition first.)
 
 ```zsh
 source ~/.config/fsh/extras/zsh-autocomplete/tokyonight-night.zsh
 ```
 
-Add the line after loading zsh-autocomplete, matching your active variant. The label becomes bold blue and the common substring gets the theme's search treatment (foreground on `bg_search`).
+Add the line after loading zsh-autocomplete, matching your active variant. All patches are guarded: they silently skip when zsh-autocomplete is absent or the upstream literals change in a newer version.
 
-> **Note:** use the context `:completion:*:unambiguous` — zsh-autocomplete's own README documents `:autocomplete:*:unambiguous`, which never matches and silently leaves the default in place. Also known limitation: the highlight of matched text in the *history-lines* listing is hardcoded upstream (black on bright yellow, `_comp_colors` in `_autocomplete__history_lines`) and exposes no customization hook.
+> **Note:** for the `common substring:` entry, use the context `:completion:*:unambiguous` — zsh-autocomplete's own README documents `:autocomplete:*:unambiguous`, which never matches and silently leaves the default in place.
 
 ### history-substring-search integration
 
