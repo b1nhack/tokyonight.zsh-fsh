@@ -126,18 +126,27 @@ F-Sy-H 样式键与 tokyonight.nvim 高亮组的对应关系（各变体的具�
 
 ### zsh-autocomplete 集成
 
-zsh-autocomplete 默认把补全列表里的 `common substring:` 条目画成 ANSI color 11 上的黑字——在 Tokyo Night 配色下几乎不可见。同一份 extras 还会重定义另外两处绕过 zstyle 的上游硬编码：
-
-- 异步补全列表被截断时追加的 `(MORE)` 徽标——`Functions/Init/.autocomplete__async` 里经裸 `compadd -x` 写死的 ANSI 黑字亮蓝底，绕过 zstyle `format` 机制；
-- 历史行列表里匹配子串的高亮——`Completions/_autocomplete__history_lines` 里写进 `_comp_colors` 模式串的 SGR `30;103`（黑字亮黄底），会覆盖 zstyle `list-colors` 机制。
-
-这两处都没有官方定制入口，因此 extras 在插件加载后直接补丁所在的 shell 函数：`(MORE)` 徽标换成 truecolor 的粗体主题背景色文字配主题蓝底；历史行匹配改用主题的 search 语义（粗体前景于 `bg_search` 上）——都不再依赖终端的 ANSI 调色板。（历史行函数是 `#autoload` 的，extras 会先强制加载其定义再打补丁。）
+zsh-autocomplete 的补全界面大部分用默认色或硬编码颜色渲染，完全不理会 Tokyo Night。本仓库提供现成的重定义（安装到 `~/.config/fsh/extras/zsh-autocomplete/`）：
 
 ```zsh
 source ~/.config/fsh/extras/zsh-autocomplete/tokyonight-night.zsh
 ```
 
-把这行加在加载 zsh-autocomplete 之后，并与当前使用的变体保持一致。所有补丁都带守卫：未加载 zsh-autocomplete 或上游字面量在新版本中变了，都会静默跳过。
+把这行加在加载 zsh-autocomplete 之后，并与当前使用的变体保持一致。重定义的内容：
+
+| 界面元素 | 上游默认 | Tokyo Night 处理 |
+| :-- | :-- | :-- |
+| `common substring:` 条目 | ANSI color 11 黑字（`_autocomplete__unambiguous` 回退） | 粗蓝标签；值：前景于 `bg_search` |
+| `(MORE)` 截断徽标 | `.autocomplete__async` 硬编码 ANSI 黑字亮蓝底 | 粗体主题背景色文字配主题蓝底 |
+| 历史行匹配高亮 | `_comp_colors` 里的 SGR `30;103` 黑字亮黄底 | 粗体前景于 `bg_search` |
+| 菜单选择状态行（`line 3/85 3%`）+ 滚动行 | `select-prompt`：ANSI 黑字亮蓝底；`select-scroll`：zsh 默认 | 与 `(MORE)` 相同的徽标样式 |
+| 补全消息（`Loading...`） | ANSI 亮红（`%F{9}`） | 主题红 |
+| 分组标题（`directory`、`commands`…） | 暗淡粗体终端默认色（`\e[0;1;2m`） | 粗体主题蓝 |
+| 列表中的文件类型色 + 当前选中项 | 文件无色；选中项反显视频 | 完整的 Tokyo Night `list-colors` |
+
+走 zstyle 的项在插件加载后直接覆盖即可。有三处**没有官方钩子**——`(MORE)` 徽标（裸 `compadd -x` 绕过 `format` 机制）、历史行高亮（`_comp_colors` 被硬编码 SGR 覆写）、分组标题（`zstyle -e` 回调输出裸 SGR）——因此 extras 在插件加载后改写所在的 shell 函数。历史行函数是 `#autoload` 的，会先强制加载其定义。所有补丁都带守卫：未加载 zsh-autocomplete 或上游字面量变了，都会静默跳过。
+
+`list-colors` 必须给完整集合：complist 会用内置默认值填充缺项（比如目录变粗体红），给一半比不给更难看。
 
 > **注意**：`common substring:` 的上下文必须写 `:completion:*:unambiguous`——zsh-autocomplete 自己的 README 写的是 `:autocomplete:*:unambiguous`，那个模式匹配不上、会被静默忽略。
 

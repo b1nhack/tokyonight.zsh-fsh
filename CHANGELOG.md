@@ -7,21 +7,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- zsh-autocomplete integration now also restyles two more hardcoded spots:
-  - the `(MORE)` badge shown when the async completion listing is
-    truncated. Upstream hardcodes it as ANSI black on bright blue via raw
-    `compadd -x` (which bypasses the zstyle `format` machinery), leaving
-    no official hook — the extras patch the widget function after the
-    plugin loads, replacing it with a truecolor bold
-    theme-background-on-blue badge.
-  - the matched-query highlight in the history-lines listing. Upstream
-    bakes SGR `30;103` (black on bright yellow) into the `_comp_colors`
-    pattern specs, overriding the zstyle `list-colors` machinery. The
-    extras force-load the `#autoload`ed completion function and patch the
-    literals with a truecolor bold foreground-on-`bg_search` spec.
-  Both patches are guarded and silently skip when the upstream literals
-  are not found (e.g. on newer/older plugin versions). This supersedes
-  the previously documented "known limitation" for history-lines.
+- zsh-autocomplete integration: complete restyle of the completion UI
+  that upstream renders with default or hardcoded colors:
+  - `(MORE)` truncation badge — ANSI black on bright blue via raw
+    `compadd -x` (bypasses the zstyle `format` machinery); now a
+    truecolor bold theme-background-on-blue badge via a function patch.
+  - history-lines matched-query highlight — SGR `30;103` baked into the
+    `_comp_colors` specs; the `#autoload`ed function is force-loaded and
+    patched with a truecolor bold foreground-on-`bg_search` spec.
+    Supersedes the previously documented "known limitation".
+  - menu-selection status line (`line 3/85 3%`) and scroll line — the
+    plugin sets `select-prompt` to ANSI black on bright blue and leaves
+    `select-scroll` at the zsh default; both overridden zstyles.
+  - completion messages (`Loading...`) — ANSI bright red replaced with
+    the theme red.
+  - group headings (`directory`, `commands`, ...) — the `zstyle -e`
+    callback's raw faint-bold SGR patched to bold theme blue.
+  - file-type colors and the menu-selection current item in completion
+    listings — a complete Tokyo Night `list-colors` set (directories,
+    symlinks, sockets, devices, executables, setuid/setgid, sticky and
+    world-writable dirs, current item). Kept complete on purpose:
+    complist fills unset entries with its own defaults (e.g. bold-red
+    directories).
+  Every function patch is guarded and silently skips when the upstream
+  literals are not found (e.g. on newer/older plugin versions).
 
 ## [1.1.0] - 2026-10-28
 

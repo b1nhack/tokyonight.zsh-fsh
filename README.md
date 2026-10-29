@@ -126,18 +126,27 @@ Full definitions live in the [themes/](themes) INI files.
 
 ### zsh-autocomplete integration
 
-zsh-autocomplete paints its `common substring:` completion-list entry black on ANSI color 11 by default — nearly invisible on Tokyo Night palettes. The same extras also restyle two more spots that upstream hardcodes outside any zstyle:
-
-- the `(MORE)` badge appended when the async listing is truncated — ANSI black on bright blue via raw `compadd -x` (`Functions/Init/.autocomplete__async`), which bypasses the zstyle `format` machinery;
-- the matched-query highlight in the *history-lines* listing — SGR `30;103` (black on bright yellow) baked into the `_comp_colors` pattern specs (`Completions/_autocomplete__history_lines`), overriding the zstyle `list-colors` machinery.
-
-Since neither exposes an official hook, the extras patch the containing shell functions after the plugin loads: the `(MORE)` badge becomes a truecolor bold theme-background-on-blue badge, and the history-lines matches get the theme's search treatment (bold foreground on `bg_search`) — neither depends on your terminal's ANSI palette anymore. (The history-lines function is `#autoload`ed, so the extras force-load its definition first.)
+zsh-autocomplete renders most of its completion UI with default or hardcoded colors that ignore Tokyo Night entirely. This repo ships ready-made restyles (installed to `~/.config/fsh/extras/zsh-autocomplete/`):
 
 ```zsh
 source ~/.config/fsh/extras/zsh-autocomplete/tokyonight-night.zsh
 ```
 
-Add the line after loading zsh-autocomplete, matching your active variant. All patches are guarded: they silently skip when zsh-autocomplete is absent or the upstream literals change in a newer version.
+Add the line after loading zsh-autocomplete, matching your active variant. What gets restyled:
+
+| UI element | Upstream default | Tokyo Night treatment |
+| :-- | :-- | :-- |
+| `common substring:` entry | black on ANSI color 11 (fallback in `_autocomplete__unambiguous`) | bold blue label; value: foreground on `bg_search` |
+| `(MORE)` truncation badge | ANSI black on bright blue, hardcoded in `.autocomplete__async` | bold theme background on theme blue |
+| history-lines match highlight | SGR `30;103` black on bright yellow in `_comp_colors` | bold foreground on `bg_search` |
+| menu-selection status line (`line 3/85 3%`) + scroll line | `select-prompt`: ANSI black on bright blue; `select-scroll`: zsh default | same badge treatment as `(MORE)` |
+| completion messages (`Loading...`) | ANSI bright red (`%F{9}`) | theme red |
+| group headings (`directory`, `commands`, …) | faint-bold terminal default (`\e[0;1;2m`) | bold theme blue |
+| file types + current item in listings | uncolored files; reverse-video selection | complete Tokyo Night `list-colors` set |
+
+The zstyle-backed items are simply overridden after the plugin loads. Three spots have **no official hook** — the `(MORE)` badge (raw `compadd -x` bypasses the `format` machinery), the history-lines highlight (`_comp_colors` overwritten with hardcoded SGR) and the group headings (`zstyle -e` callback emitting raw SGR) — so the extras rewrite the containing shell functions after the plugin loads. The history-lines function is `#autoload`ed, so its definition is force-loaded first. Every patch is guarded and silently skips when zsh-autocomplete is absent or the upstream literals change in a newer version.
+
+The `list-colors` set must stay complete: complist fills unset entries with its own built-in defaults (e.g. bold-red directories), so a partial set would look worse than none.
 
 > **Note:** for the `common substring:` entry, use the context `:completion:*:unambiguous` — zsh-autocomplete's own README documents `:autocomplete:*:unambiguous`, which never matches and silently leaves the default in place.
 
