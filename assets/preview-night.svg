@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="535" height="360" viewBox="0 0 535 360" font-family="ui-monospace, &#x27;JetBrains Mono&#x27;, &#x27;Fira Code&#x27;, &#x27;SF Mono&#x27;, Menlo, Consolas, monospace" font-size="13">
-<rect x="0" y="0" width="535" height="360" rx="10" fill="#16161e"/>
-<path d="M 0 38 H 535 V 350 Q 535 360 525 360 H 10 Q 0 360 0 350 Z" fill="#1a1b26"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="535" height="404" viewBox="0 0 535 404" font-family="ui-monospace, &#x27;JetBrains Mono&#x27;, &#x27;Fira Code&#x27;, &#x27;SF Mono&#x27;, Menlo, Consolas, monospace" font-size="13">
+<rect x="0" y="0" width="535" height="404" rx="10" fill="#16161e"/>
+<path d="M 0 38 H 535 V 394 Q 535 404 525 404 H 10 Q 0 404 0 394 Z" fill="#1a1b26"/>
 <circle cx="22.0" cy="21.0" r="5.5" fill="#f7768e"/>
 <circle cx="38.5" cy="21.0" r="5.5" fill="#e0af68"/>
 <circle cx="55.0" cy="21.0" r="5.5" fill="#9ece6a"/>
@@ -44,7 +44,7 @@
 <text x="45.4" y="245.0" fill="#c0caf5" xml:space="preserve"> f </text>
 <text x="68.8" y="245.0" fill="#bb9af7" xml:space="preserve">in </text>
 <text x="92.2" y="245.0" fill="#bb9af7" font-weight="bold" xml:space="preserve">*.zsh</text>
-<text x="131.2" y="245.0" fill="#c0caf5" xml:space="preserve">; </text>
+<text x="131.2" y="245.0" fill="#89ddff" xml:space="preserve">; </text>
 <text x="146.8" y="245.0" fill="#bb9af7" xml:space="preserve">do</text>
 <text x="162.4" y="245.0" fill="#7aa2f7" xml:space="preserve"> wc</text>
 <text x="185.8" y="245.0" fill="#7dcfff" xml:space="preserve"> -l</text>
@@ -74,8 +74,21 @@
 <text x="154.6" y="311.0" fill="#89ddff" xml:space="preserve"> &amp;&amp; </text>
 <text x="185.8" y="311.0" fill="#2ac3de" xml:space="preserve">echo</text>
 <text x="217.0" y="311.0" fill="#ff9e64" font-weight="bold" xml:space="preserve"> !!</text>
-<text x="22.0" y="333.0" fill="#f7768e" font-weight="bold" xml:space="preserve">invalidcommand</text>
-<text x="131.2" y="333.0" fill="#7dcfff" xml:space="preserve"> --typo</text>
-<text x="185.8" y="333.0" fill="#c0caf5" xml:space="preserve">=</text>
-<text x="193.6" y="333.0" fill="#7dcfff" xml:space="preserve">/dev/null</text>
+<text x="22.0" y="333.0" fill="#7aa2f7" xml:space="preserve">make</text>
+<text x="53.2" y="333.0" fill="#e0af68" xml:space="preserve"> LLVM=1</text>
+<text x="107.8" y="333.0" fill="#e0af68" xml:space="preserve"> O=../linux-clang/</text>
+<text x="248.2" y="333.0" fill="#7dcfff" xml:space="preserve"> -j</text>
+<text x="271.6" y="333.0" fill="#2ac3de" xml:space="preserve"> `</text>
+<text x="287.2" y="333.0" fill="#7aa2f7" xml:space="preserve">nproc</text>
+<text x="326.2" y="333.0" fill="#2ac3de" xml:space="preserve">`</text>
+<text x="22.0" y="355.0" fill="#2ac3de" xml:space="preserve">echo</text>
+<text x="53.2" y="355.0" fill="#c0caf5" xml:space="preserve"> </text>
+<text x="61.0" y="355.0" fill="#7dcfff" xml:space="preserve">$(</text>
+<text x="76.6" y="355.0" fill="#7aa2f7" xml:space="preserve">uname</text>
+<text x="115.6" y="355.0" fill="#7dcfff" xml:space="preserve"> -m</text>
+<text x="139.0" y="355.0" fill="#7dcfff" xml:space="preserve">)</text>
+<text x="22.0" y="377.0" fill="#f7768e" font-weight="bold" xml:space="preserve">invalidcommand</text>
+<text x="131.2" y="377.0" fill="#7dcfff" xml:space="preserve"> --typo</text>
+<text x="185.8" y="377.0" fill="#c0caf5" xml:space="preserve">=</text>
+<text x="193.6" y="377.0" fill="#7dcfff" xml:space="preserve">/dev/null</text>
 </svg>

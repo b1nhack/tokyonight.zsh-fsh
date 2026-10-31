@@ -61,6 +61,11 @@ DEMO: list[list[tuple[str, str | None]]] = [
      ("$USER", "here-string-var"), ('"', "here-string-text")],
     [("make", "command"), (" ", None), ("2", "exec-descriptor"), (">", "redirection"), (" /dev/null", "path"),
      (" && ", "commandseparator"), ("echo", "builtin"), (" !!", "history-expansion")],
+    [("make", "command"), (" LLVM=1", "variable"), (" O=../linux-clang/", "variable"),
+     (" -j", "single-hyphen-option"), (" `", "back-quoted-argument"), ("nproc", "command"),
+     ("`", "back-quoted-argument")],
+    [("echo", "builtin"), (" ", None), ("$(", "recursive-base"), ("uname", "command"),
+     (" -m", "single-hyphen-option"), (")", "recursive-base")],
     [("invalidcommand", "unknown-token"), (" --typo", "double-hyphen-option"), ("=", None), ("/dev/null", "path")],
 ]
 
@@ -74,6 +79,52 @@ def load_styles(variant: str) -> dict[str, str]:
         for key, value in ini.items(section):
             styles[key] = value.strip()
     return styles
+
+
+# fast-theme's fallback chain (fast-theme: the `map` associative array),
+# restricted to the long style keys this script may look up. The INI files
+# define the short `[for-loop]` keys (forvar, fornum, ...), which fast-theme
+# resolves through this chain at theme-load time.
+FALLBACKS: dict[str, tuple[str, ...]] = {
+    "for-loop-variable": ("forvar", "mathvar", "variable"),
+    "for-loop-number": ("fornum", "mathnum"),
+    "for-loop-operator": ("foroper", "reserved-word"),
+    "for-loop-separator": ("forsep", "commandseparator"),
+    "subcommand": ("reserved-word",),
+    "suffix-alias": ("alias", "command", "builtin"),
+    "function": ("builtin", "command"),
+    "precommand": ("command",),
+    "hashed-command": ("command",),
+    "mathvar": ("forvar", "variable"),
+    "mathnum": ("fornum",),
+    "path_pathseparator": ("pathseparator",),
+    "globbing": ("back-or-dollar-double-quoted-argument",),
+    "globbing-ext": ("double-quoted-argument",),
+    "single-hyphen-option": ("single-quoted-argument",),
+    "double-hyphen-option": ("double-quoted-argument",),
+    "back-or-dollar-double-quoted-argument": ("back-dollar-quoted-argument",),
+    "back-dollar-quoted-argument": ("back-or-dollar-double-quoted-argument",),
+    "here-string-var": ("back-or-dollar-double-quoted-argument",),
+    "case-input": ("variable",),
+    "case-parentheses": ("reserved-word",),
+    "case-condition": ("correct-subtle",),
+    "exec-descriptor": ("reserved-word",),
+    "here-string-text": ("subtle-bg",),
+    "secondary": (),
+    "recursive-base": ("default",),
+}
+
+
+def resolve(styles: dict[str, str], key: str) -> str:
+    """Return the style for key, walking fast-theme's fallback chain."""
+    value = styles.get(key, "")
+    if value:
+        return value
+    for fallback in FALLBACKS.get(key, ()):
+        value = styles.get(fallback, "")
+        if value:
+            return value
+    return ""
 
 
 def parse_style(value: str) -> tuple[str | None, str | None, bool, bool]:
@@ -139,7 +190,7 @@ def render(variant: str) -> str:
         for text, style_key in line:
             fg, bg, bold, underline = (None, None, False, False)
             if style_key:
-                fg, bg, bold, underline = parse_style(styles.get(style_key, ""))
+                fg, bg, bold, underline = parse_style(resolve(styles, style_key))
             fg = fg or default_fg
             weight = " font-weight=\"bold\"" if bold else ""
             deco = " text-decoration=\"underline\"" if underline else ""

@@ -3,6 +3,38 @@
 All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.3.0] - 2026-10-31
+
+### Fixed
+
+- **Invisible nested code** — interiors of `` `...` ``, `$( ... )` and `eval`
+  arguments were recursively highlighted with upstream's shipped 256-color
+  `zdharma` secondary theme, whose command color (`#5f5fdf` dark blue) is
+  nearly invisible on the dark variants (e.g. the `nproc` in
+  ``make ... -j `nproc` ``). Following catppuccin/zsh-fsh, `secondary` is now
+  left **empty**: F-Sy-H still re-highlights nested code, but with this same
+  Tokyo Night theme instead of switching to a secondary theme.
+
+### Changed
+
+- `correct-subtle` / `incorrect-subtle` are now foreground-only styles
+  (theme `blue` / `red`, as in fsh's own themes and catppuccin/zsh-fsh).
+  F-Sy-H's `make` chroma flags make targets by recoloring text, so command
+  substitutions like `` `nproc` `` — which it misreads as a target — are no
+  longer painted with a background box. The old backgrounds were muddy
+  browns (`night` `#4a272f`; `day` even used the joke hex `#dababe`).
+- `paired-bracket` now follows tokyonight.nvim's actual `MatchParen` highlight
+  — bold orange (`#ff9e64` / `#ff966c` / `#b15c00`) — instead of painting a
+  `bg_search` background under the matching pair. The editor itself never
+  puts text on `bg_search`, and the old background dragged the bracket color
+  down to 1.3–2.7:1 contrast on `day`. Every color in every INI is an exact
+  tokyonight.nvim palette value, verified against upstream's generated
+  `extras/lua/tokyonight_*.lua` tables.
+- Previews: `scripts/generate_previews.py` now resolves styles through
+  fast-theme's fallback chain (e.g. `for-loop-variable` → `forvar`), and the
+  demo gained command-substitution lines (``make ... -j `nproc` `` and
+  `echo $(uname -m)`) showcasing recursive highlighting.
+
 ## [1.2.0] - 2026-10-28
 
 ### Added

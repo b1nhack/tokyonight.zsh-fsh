@@ -22,6 +22,7 @@ Tokyonight.zsh-fsh brings the four color schemes of [folke/tokyonight.nvim](http
 
 - **Four variants** — `night`, `storm`, `moon`, `day`, straight from the official tokyonight.nvim palettes.
 - **Complete coverage** — all 59 F-Sy-H style keys are themed: commands, builtins, reserved words, aliases, paths, globbing, options, strings, in-string escapes, variables, math, `for` loops, `case`, heredocs/here-strings, redirections, history expansion, bracket matching, recursion (secondary theme) and more.
+- **Self-consistent recursion** — the interiors of `` `...` ``, `$( ... )` and `eval` arguments are recursively highlighted with the *same* theme (`secondary` left empty, as in [catppuccin/zsh-fsh](https://github.com/catppuccin/zsh-fsh)). Upstream's shipped `zdharma` secondary — what a set `secondary` delegates to — renders nested commands in a dark 256-color blue (`#5f5fdf`) that is near-invisible on the dark variants.
 - **Truecolor** — colors are written as `#rrggbb`; zsh renders them exactly on truecolor terminals and degrades gracefully to the nearest 256-color entry otherwise.
 - **Semantics, not vibes** — each F-Sy-H key is mapped to the tokyonight.nvim highlight-group it corresponds to (see the [mapping table](#color-mapping)), so your shell matches your editor.
 
@@ -114,13 +115,22 @@ How F-Sy-H styles map onto tokyonight.nvim highlight groups (hex values per vari
 | `bracket-level-1` | rainbow `blue` + bold | `#7aa2f7` | `#7aa2f7` | `#82aaff` | `#2e7de9` |
 | `bracket-level-2` | rainbow `yellow` + bold | `#e0af68` | `#e0af68` | `#ffc777` | `#8c6c3e` |
 | `bracket-level-3` | rainbow `green` + bold | `#9ece6a` | `#9ece6a` | `#c3e88d` | `#587539` |
-| `paired-bracket` (background) | `bg_search` | `#3d59a1` | `#3d59a1` | `#3e68d7` | `#7890dd` |
+| `paired-bracket` | `MatchParen` (bold + orange) | `#ff9e64` | `#ff9e64` | `#ff966c` | `#b15c00` |
 | `case-condition` (background) | `bg_visual` | `#283457` | `#2e3c64` | `#2d3f76` | `#b7c1e3` |
 | `subtle-bg`, `here-string-text` (backgrounds) | `bg_highlight` | `#292e42` | `#292e42` | `#2f334d` | `#c4c8da` |
-| `incorrect-subtle` (background) | `diff.delete` | `#4a272f` | `#52313f` | `#4b2a3d` | `#dababe` |
+| `correct-subtle`, `incorrect-subtle` (foreground) | `blue` / `red` | `#7aa2f7` / `#f7768e` | `#7aa2f7` / `#f7768e` | `#82aaff` / `#ff757f` | `#2e7de9` / `#f52a65` |
 | `mathvar` | `blue` + bold | `#7aa2f7` | `#7aa2f7` | `#82aaff` | `#2e7de9` |
 
 Full definitions live in the [themes/](themes) INI files.
+
+Every color in every INI is an exact tokyonight.nvim palette value, verified
+against upstream's generated `extras/lua/tokyonight_*.lua` tables.
+`correct-subtle` / `incorrect-subtle` are foreground-only styles (as in fsh's
+own themes), so the `make` chroma flags targets by recoloring text instead of
+painting boxes, and `paired-bracket` follows the editor's own `MatchParen` —
+bold orange, no background — for the same reason. `case-condition` uses
+`bg_visual` on every variant; on `day` the dark accents sit on it at
+~2.3–2.9:1, exactly as they do in tokyonight.nvim day itself.
 
 ## Customization
 
@@ -181,20 +191,34 @@ fast-theme XDG:overlay
 
 ### Recursive highlighting
 
-Inside `$( ... )` and `eval` arguments, F-Sy-H switches to a *secondary* theme so the nested code reads as distinct. These themes use the shipped **`zdharma`** theme (cool blues/purples that sit well next to Tokyo Night). Prefer a different one — e.g. `clean`? Add this to your overlay:
+Inside `` ` ... ` ``, `$( ... )` and `eval` arguments, F-Sy-H recursively
+re-highlights the nested code; `secondary` decides whether it switches to a
+different theme while doing so. Like
+[catppuccin/zsh-fsh](https://github.com/catppuccin/zsh-fsh), every variant
+leaves `secondary` **empty**, so nested code is highlighted with this same
+Tokyo Night theme — the backticks and `recursive-base` markers still set the
+boundaries apart. (A set secondary is also how the `nproc` in `` -j `nproc` ``
+used to disappear: upstream's shipped `zdharma` secondary renders commands in
+a dark 256-color blue that is unreadable here.)
+
+Want the nested code to switch themes instead? Point `secondary` somewhere
+via an overlay:
 
 ```ini
 [base]
 secondary = clean
 ```
 
-You can even use another Tokyo Night variant if you installed all four (`secondary = tokyonight-moon`).
+You can even use another Tokyo Night variant if you installed all four
+(`secondary = XDG:tokyonight-moon`).
 
 ## Troubleshooting
 
 - **`cannot parse style …: unknown color`** — your zsh is older than 5.7 and doesn't understand `#rrggbb` styles. Upgrade zsh, or convert the INI values to 256-color numbers (`fast-theme -p` prints the palette).
 - **Colors look washed out** — your terminal is rendering an approximation, i.e. it has no truecolor support. Verify with the `print -P` check above, and check `$COLORTERM`.
 - **Live test block** — `fast-theme -t XDG:tokyonight-night` switches and prints a demo of all style categories.
+- **Highlights don't match this README after updating the theme** — fsh caches the processed theme in `$FAST_WORK_DIR` (`current_theme.zsh`). Re-run `fast-theme XDG:tokyonight-night` to rebuild the cache.
+- **Words like `` `nproc` `` get recolored after `make`** — that is fsh's `make` chroma checking the word against `./Makefile` targets (found → `correct-subtle`, not found → `incorrect-subtle`). This theme styles both as foreground colors only, so the worst case is a briefly tinted command substitution — never a background box.
 - **Start over** — `fast-theme -r` resets the active theme (restart the shell afterwards).
 
 ## Regenerating the previews
