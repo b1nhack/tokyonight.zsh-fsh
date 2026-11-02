@@ -101,15 +101,15 @@ How F-Sy-H styles map onto tokyonight.nvim highlight groups (hex values per vari
 
 | F-Sy-H styles | tokyonight.nvim token | night | storm | moon | day |
 | :-- | :-- | --: | --: | --: | --: |
-| `default` | foreground | `#c0caf5` | `#c0caf5` | `#c8d3f5` | `#3760bf` |
+| `default`, `forvar` | foreground | `#c0caf5` | `#c0caf5` | `#c8d3f5` | `#3760bf` |
 | `unknown-token`, `matherr` | `red` / `error` | `#f7768e` | `#f7768e` | `#ff757f` | `#f52a65` |
 | `command`, `single-sq-bracket` | `blue` (Function) | `#7aa2f7` | `#7aa2f7` | `#82aaff` | `#2e7de9` |
-| `builtin`, `function`, `alias`, `subcommand`, `precommand`, `back-quoted-argument` | `blue1` (@function.builtin) | `#2ac3de` | `#2ac3de` | `#65bcff` | `#188092` |
-| `reserved-word`, `double-paren`, `double-sq-bracket`, `for-loop-operator`, `globbing` | `magenta` (@keyword.control) | `#bb9af7` | `#bb9af7` | `#c099ff` | `#9854f1` |
+| `builtin`, `function`, `alias`, `subcommand`, `precommand`, `hashed-command`, `back-quoted-argument` | `blue1` (@function.builtin) | `#2ac3de` | `#2ac3de` | `#65bcff` | `#188092` |
+| `reserved-word`, `double-paren`, `double-sq-bracket`, `for-loop-operator`, `globbing`, `globbing-ext`, `back-dollar-quoted-argument`, `back-or-dollar-double-quoted-argument` | `magenta` (@keyword.control) | `#bb9af7` | `#bb9af7` | `#c099ff` | `#9854f1` |
 | `single-`/`double-`/`dollar-quoted-argument`, `optarg-string` | `green` (String) | `#9ece6a` | `#9ece6a` | `#c3e88d` | `#587539` |
 | `variable`, `here-string-var`, `case-input` | `yellow` (@variable.parameter) | `#e0af68` | `#e0af68` | `#ffc777` | `#8c6c3e` |
-| `path`, `path-to-dir`, `single-`/`double-hyphen-option` | `cyan` | `#7dcfff` | `#7dcfff` | `#86e1fc` | `#007197` |
-| `commandseparator`, `redirection`, `here-string-tri`, `for-loop-separator`, `case-parentheses`, `assign-array-bracket` | `blue5` (@operator) | `#89ddff` | `#89ddff` | `#89ddff` | `#006a83` |
+| `path`, `path-to-dir`, `single-`/`double-hyphen-option`, `recursive-base`, `global-alias` (fg) | `cyan` | `#7dcfff` | `#7dcfff` | `#86e1fc` | `#007197` |
+| `commandseparator`, `redirection`, `here-string-tri`, `for-loop-separator`, `case-parentheses`, `assign-array-bracket`, `subtle-separator` | `blue5` (@operator) | `#89ddff` | `#89ddff` | `#89ddff` | `#006a83` |
 | `mathnum`, `for-loop-number`, `exec-descriptor`, `history-expansion`, `optarg-number` | `orange` (@number) | `#ff9e64` | `#ff9e64` | `#ff966c` | `#b15c00` |
 | `comment` | `comment` | `#565f89` | `#565f89` | `#636da6` | `#848cb5` |
 | `bracket-level-1` | rainbow `blue` + bold | `#7aa2f7` | `#7aa2f7` | `#82aaff` | `#2e7de9` |
@@ -117,7 +117,7 @@ How F-Sy-H styles map onto tokyonight.nvim highlight groups (hex values per vari
 | `bracket-level-3` | rainbow `green` + bold | `#9ece6a` | `#9ece6a` | `#c3e88d` | `#587539` |
 | `paired-bracket` | `MatchParen` (bold + orange) | `#ff9e64` | `#ff9e64` | `#ff966c` | `#b15c00` |
 | `case-condition` (background) | `bg_visual` | `#283457` | `#2e3c64` | `#2d3f76` | `#b7c1e3` |
-| `subtle-bg`, `here-string-text` (backgrounds) | `bg_highlight` | `#292e42` | `#292e42` | `#2f334d` | `#c4c8da` |
+| `subtle-bg`, `here-string-text`, `global-alias` (backgrounds) | `bg_highlight` | `#292e42` | `#292e42` | `#2f334d` | `#c4c8da` |
 | `correct-subtle`, `incorrect-subtle` (foreground) | `blue` / `red` | `#7aa2f7` / `#f7768e` | `#7aa2f7` / `#f7768e` | `#82aaff` / `#ff757f` | `#2e7de9` / `#f52a65` |
 | `mathvar` | `blue` + bold | `#7aa2f7` | `#7aa2f7` | `#82aaff` | `#2e7de9` |
 

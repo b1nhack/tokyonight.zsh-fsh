@@ -101,15 +101,15 @@ F-Sy-H 样式键与 tokyonight.nvim 高亮组的对应关系（各变体的具�
 
 | F-Sy-H 样式 | tokyonight.nvim token | night | storm | moon | day |
 | :-- | :-- | --: | --: | --: | --: |
-| `default` | 前景色 | `#c0caf5` | `#c0caf5` | `#c8d3f5` | `#3760bf` |
+| `default`、`forvar` | 前景色 | `#c0caf5` | `#c0caf5` | `#c8d3f5` | `#3760bf` |
 | `unknown-token`、`matherr` | `red` / `error` | `#f7768e` | `#f7768e` | `#ff757f` | `#f52a65` |
 | `command`、`single-sq-bracket` | `blue`（Function） | `#7aa2f7` | `#7aa2f7` | `#82aaff` | `#2e7de9` |
-| `builtin`、`function`、`alias`、`subcommand`、`precommand`、`back-quoted-argument` | `blue1`（@function.builtin） | `#2ac3de` | `#2ac3de` | `#65bcff` | `#188092` |
-| `reserved-word`、`double-paren`、`double-sq-bracket`、`for-loop-operator`、`globbing` | `magenta`（@keyword.control） | `#bb9af7` | `#bb9af7` | `#c099ff` | `#9854f1` |
+| `builtin`、`function`、`alias`、`subcommand`、`precommand`、`hashed-command`、`back-quoted-argument` | `blue1`（@function.builtin） | `#2ac3de` | `#2ac3de` | `#65bcff` | `#188092` |
+| `reserved-word`、`double-paren`、`double-sq-bracket`、`for-loop-operator`、`globbing`、`globbing-ext`、`back-dollar-quoted-argument`、`back-or-dollar-double-quoted-argument` | `magenta`（@keyword.control） | `#bb9af7` | `#bb9af7` | `#c099ff` | `#9854f1` |
 | `single-`/`double-`/`dollar-quoted-argument`、`optarg-string` | `green`（String） | `#9ece6a` | `#9ece6a` | `#c3e88d` | `#587539` |
 | `variable`、`here-string-var`、`case-input` | `yellow`（@variable.parameter） | `#e0af68` | `#e0af68` | `#ffc777` | `#8c6c3e` |
-| `path`、`path-to-dir`、`single-`/`double-hyphen-option` | `cyan` | `#7dcfff` | `#7dcfff` | `#86e1fc` | `#007197` |
-| `commandseparator`、`redirection`、`here-string-tri`、`for-loop-separator`、`case-parentheses`、`assign-array-bracket` | `blue5`（@operator） | `#89ddff` | `#89ddff` | `#89ddff` | `#006a83` |
+| `path`、`path-to-dir`、`single-`/`double-hyphen-option`、`recursive-base`、`global-alias`（前景） | `cyan` | `#7dcfff` | `#7dcfff` | `#86e1fc` | `#007197` |
+| `commandseparator`、`redirection`、`here-string-tri`、`for-loop-separator`、`case-parentheses`、`assign-array-bracket`、`subtle-separator` | `blue5`（@operator） | `#89ddff` | `#89ddff` | `#89ddff` | `#006a83` |
 | `mathnum`、`for-loop-number`、`exec-descriptor`、`history-expansion`、`optarg-number` | `orange`（@number） | `#ff9e64` | `#ff9e64` | `#ff966c` | `#b15c00` |
 | `comment` | `comment` | `#565f89` | `#565f89` | `#636da6` | `#848cb5` |
 | `bracket-level-1` | 彩虹 `blue` + 粗体 | `#7aa2f7` | `#7aa2f7` | `#82aaff` | `#2e7de9` |
@@ -117,7 +117,7 @@ F-Sy-H 样式键与 tokyonight.nvim 高亮组的对应关系（各变体的具�
 | `bracket-level-3` | 彩虹 `green` + 粗体 | `#9ece6a` | `#9ece6a` | `#c3e88d` | `#587539` |
 | `paired-bracket` | `MatchParen`（粗体 + 橙色） | `#ff9e64` | `#ff9e64` | `#ff966c` | `#b15c00` |
 | `case-condition`（背景） | `bg_visual` | `#283457` | `#2e3c64` | `#2d3f76` | `#b7c1e3` |
-| `subtle-bg`、`here-string-text`（背景） | `bg_highlight` | `#292e42` | `#292e42` | `#2f334d` | `#c4c8da` |
+| `subtle-bg`、`here-string-text`、`global-alias`（背景） | `bg_highlight` | `#292e42` | `#292e42` | `#2f334d` | `#c4c8da` |
 | `correct-subtle`、`incorrect-subtle`（前景） | `blue` / `red` | `#7aa2f7` / `#f7768e` | `#7aa2f7` / `#f7768e` | `#82aaff` / `#ff757f` | `#2e7de9` / `#f52a65` |
 | `mathvar` | `blue` + 粗体 | `#7aa2f7` | `#7aa2f7` | `#82aaff` | `#2e7de9` |
 
