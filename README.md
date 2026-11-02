@@ -170,6 +170,16 @@ source ~/.config/fsh/extras/history-substring-search/tokyonight-night.zsh
 
 Found matches: bold foreground on `bg_search`. No match: bold red.
 
+### zsh-vi-mode integration
+
+zsh-vi-mode paints its own highlights on top of whatever fast-syntax-highlighting rendered — the region entry it appends wins, so the fsh theme alone cannot restyle them. Every highlight it draws (visual and visual-line selection, the transient surround-delimiter flash, the repeat `.` preview) runs through the same three variables, whose defaults are a harsh red (`bg #cc0000`, `fg #eeeeee`). Ready-made restyles land in `~/.config/fsh/extras/zsh-vi-mode/`:
+
+```zsh
+source ~/.config/fsh/extras/zsh-vi-mode/tokyonight-night.zsh
+```
+
+Selection and flashes use the palette's selection blue (`bg_visual`) with the default foreground.
+
 ### Overlay (tweak a few styles)
 
 Don't copy and edit a whole theme — use an [F-Sy-H overlay](https://github.com/zdharma-continuum/fast-syntax-highlighting/blob/master/THEME_GUIDE.md). Create `~/.config/fsh/overlay.ini`:

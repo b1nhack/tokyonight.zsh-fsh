@@ -163,6 +163,16 @@ source ~/.config/fsh/extras/history-substring-search/tokyonight-night.zsh
 
 命中：粗体前景于 `bg_search` 上；未命中：粗体红。
 
+### zsh-vi-mode 集成
+
+zsh-vi-mode 会把自绘的高亮追加到 fast-syntax-highlighting 已画的内容之上——它追加的 region 条目最终生效，所以光靠 fsh 主题无法重定义。它画的所有高亮（visual 与 visual-line 选区、surround 分隔符的瞬时闪烁、`.` 重复预览）都走同一组变量，默认是刺眼的红色（`bg #cc0000`、`fg #eeeeee`）。现成的重定义装在 `~/.config/fsh/extras/zsh-vi-mode/`：
+
+```zsh
+source ~/.config/fsh/extras/zsh-vi-mode/tokyonight-night.zsh
+```
+
+选区与闪烁使用调色板的选中蓝（`bg_visual`）加默认前景色。
+
 ### Overlay（微调少量样式）
 
 不必复制整个主题再改 —— 用 fsh 的 [overlay 机制](https://github.com/zdharma-continuum/fast-syntax-highlighting/blob/master/THEME_GUIDE.md)。创建 `~/.config/fsh/overlay.ini`：
